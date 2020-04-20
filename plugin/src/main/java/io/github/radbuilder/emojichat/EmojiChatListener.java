@@ -66,13 +66,12 @@ class EmojiChatListener implements Listener {
 		}, 20L); // Give time for the player to join
 	}
 	
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.LOWEST)
 	void onChat(AsyncPlayerChatEvent event) {
 		if (!event.getPlayer().hasPermission("emojichat.use") || !event.getPlayer().hasPermission("emojichat.use.chat"))
 			return; // Don't do anything if they don't have permission
 		
 		String message = event.getMessage();
-		
 		// Checks if the user disabled shortcuts via /emojichat toggle
 		if (!plugin.getEmojiHandler().hasShortcutsOff(event.getPlayer())) {
 			message = plugin.getEmojiHandler().translateShorthand(message);
