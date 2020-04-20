@@ -57,10 +57,30 @@ class EmojiChatListener implements Listener {
 		// Send the player the resource pack
 		Bukkit.getScheduler().runTaskLater(plugin, () -> {
 			if (player.hasPermission("emojichat.see")) { // If the player can see emojis
-				try {
-					player.setResourcePack(plugin.getEmojiHandler().getPackVariant().getUrl(plugin.getConfig().getString("pack-quality")), plugin.getEmojiHandler().getPackVariant().getHash(plugin.getConfig().getString("pack-quality"))); // If the Spigot version supports loading cached versions
-				} catch (Exception | NoSuchMethodError e) {
-					player.setResourcePack(plugin.getEmojiHandler().getPackVariant().getUrl(plugin.getConfig().getString("pack-quality"))); // If the Spigot version doesn't support loading cached versions
+				String url = plugin.getConfig().getString("pack-url");
+				String hash_str = plugin.getConfig().getString("pack-hash");
+				if (url != null && url.length() > 0) {
+					byte[] hash = new byte[20];
+					boolean is_hashset = false;
+					if (hash_str != null && hash_str.length() == 40){
+						for (int i = 0; i < hash.length; i++) {
+							int index = i * 2;
+							int j = Integer.parseInt(hash_str.substring(index, index + 2), 16);
+							hash[i] = (byte) j;
+						}
+						is_hashset = true;
+					}
+					try {
+						if (is_hashset)
+							player.setResourcePack(url, hash); // If the Spigot version supports loading cached versions
+						else
+							player.setResourcePack(url);
+					} catch (Exception | NoSuchMethodError e) {
+						player.setResourcePack(url); // If the Spigot version doesn't support loading cached versions
+					}
+				}
+				else {
+					plugin.getLogger().severe("Empty Resource Pack URL");
 				}
 			}
 		}, 20L); // Give time for the player to join

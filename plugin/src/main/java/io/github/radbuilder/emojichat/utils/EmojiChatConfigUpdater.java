@@ -70,6 +70,8 @@ public class EmojiChatConfigUpdater {
 		boolean onlyCommandList = config.contains("only-command-list") ? config.getBoolean("only-command-list") : false;
 		List<String> commandList = config.contains("command-list") ? config.getStringList("command-list") : Arrays.asList("/msg", "/tell");
 		int packVariant = config.contains("pack-variant") ? config.getInt("pack-variant") : 1;
+		String packUrl = config.contains("pack-url") ? config.getString("pack-url") : "";
+		String packHash = config.contains("pack-hash") ? config.getString("pack-hash") : "";
 		boolean disableEmojis = config.contains("disable-emojis") ? config.getBoolean("disable-emojis") : true;
 		
 		// Config lines
@@ -124,6 +126,9 @@ public class EmojiChatConfigUpdater {
 		configLines.add("# The file size difference between HD and SD packs is extremely small, and shouldn't");
 		configLines.add("# be a factor when choosing which pack to use.");
 		configLines.add("pack-quality: 'SD'");
+		configLines.add("");
+		configLines.add("pack-url: '" + packUrl + "'");
+		configLines.add("pack-hash: '" + packHash + "'");
 		configLines.add("");
 		configLines.add("# Shortcuts will replace the items in the list with the correct emoji name.");
 		configLines.add("# For example, :) will be replaced with :grinning:, which then will turn it into the emoji.");

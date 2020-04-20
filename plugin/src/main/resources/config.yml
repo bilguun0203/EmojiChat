@@ -49,6 +49,7 @@ pack-variant: 2
 pack-quality: 'SD'
 
 pack-url: ''
+pack-hash: ''
 
 # Shortcuts will replace the items in the list with the correct emoji name.
 # For example, :) will be replaced with :grinning:, which then will turn it into the emoji.
