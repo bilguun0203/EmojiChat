@@ -48,6 +48,8 @@ pack-variant: 2
 # be a factor when choosing which pack to use.
 pack-quality: 'SD'
 
+pack-url: 'https://www.dropbox.com/s/vxudqpnu6bu13bs/EmojiChat.2.SD.ResourcePack.v1.8.zip?dl=1'
+
 # Shortcuts will replace the items in the list with the correct emoji name.
 # For example, :) will be replaced with :grinning:, which then will turn it into the emoji.
 shortcuts:
