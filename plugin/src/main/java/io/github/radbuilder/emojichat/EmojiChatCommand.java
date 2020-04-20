@@ -59,11 +59,15 @@ class EmojiChatCommand implements CommandExecutor {
 				
 				if (sender instanceof Player) {
 					String url = plugin.getConfig().getString("pack-url");
-					url = (url == null || url.length() == 0) ? "https://www.dropbox.com/s/vxudqpnu6bu13bs/EmojiChat.2.SD.ResourcePack.v1.8.zip?dl=1" : url;
-					((Player) sender).setResourcePack(url);
+					if (url != null && url.length() > 0) {
+						((Player) sender).setResourcePack(url);
+						sender.sendMessage(ChatColor.GREEN + "Sent the EmojiChat ResourcePack.");
+						sender.sendMessage(ChatColor.AQUA + "If you still can't see emojis, make sure the settings for this server (on the server list) have the resource pack option set to prompt or enabled.");
+					}
+					else {
+						sender.sendMessage(ChatColor.RED + "No resource pack url specified.");
+					}
 //					((Player) sender).setResourcePack(plugin.getEmojiHandler().getPackVariant().getUrl(plugin.getConfig().getString("pack-quality")));
-					sender.sendMessage(ChatColor.GREEN + "Sent the EmojiChat ResourcePack.");
-					sender.sendMessage(ChatColor.AQUA + "If you still can't see emojis, make sure the settings for this server (on the server list) have the resource pack option set to prompt or enabled.");
 				}
 				return true;
 			case "reload":
